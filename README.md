@@ -182,7 +182,6 @@ cd olist_dw_project
 ### Pré-requisitos
 
 * Apache Hop
-* Java 11+
 * pgModeler (para editar o modelo ER)
 * ClickHouse (ou outro DW analítico local)
 

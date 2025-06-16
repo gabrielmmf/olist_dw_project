@@ -22,7 +22,7 @@ olist_dw_project/
 │   └── ...
 ├── workflows/                       # Workflows de orquestração
 │   └── main_etl_workflow.hwf
-├── original_dataset/                # Dataset bruto exportado do arquivo SQLite da Olist
+├── original_dataset/                # Dataset bruto importado do Kaggle
 │   ├── olist_orders_dataset.csv
 │   ├── olist_order_items_dataset.csv
 │   ├── olist_customers_dataset.csv

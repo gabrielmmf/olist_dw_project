@@ -1,4 +1,3 @@
-````markdown
 # 📦 olist_dw_project
 
 Projeto de construção de um **Data Warehouse (DW)** baseado no [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). Toda a engenharia de dados é realizada com **Apache Hop**, com armazenamento analítico em **ClickHouse** e visualização interativa via **Apache Superset**.

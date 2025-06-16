@@ -1,10 +1,3 @@
-* Como rodar e contribuir com os **pipelines do Apache Hop**
-* Explicação da **estrutura de diretórios**
-* Visão geral da **arquitetura**
-* Guia de contribuição
-
----
-
 ````markdown
 # 📦 Projeto Data Warehouse Olist
 
@@ -15,28 +8,32 @@ Este repositório contém um projeto completo de Data Warehouse baseado no datas
 ## 📁 Estrutura do Projeto
 
 ```plaintext
-olist_dw_project/
-├── README.md                        # Instruções e documentação
-├── raw_csvs/                        # Arquivos originais extraídos do .sqlite ou Kaggle
-│   └── olist_orders_dataset.csv
+olist_dw_hop_project/
+├── project-config.json              # Configuração principal do Apache Hop
+├── metadata/                        # Metadados do projeto (conexões, ambientes)
+├── pipelines/                       # Transformações unitárias (.hpl)
+│   ├── transform_orders.hpl
+│   ├── transform_customers.hpl
+│   ├── transform_products.hpl
 │   └── ...
-├── hop_project/                     # Projeto Apache Hop
-│   ├── pipelines/                   # Transformações unitárias (.hpl)
-│   │   ├── transform_orders.hpl
-│   │   ├── transform_customers.hpl
-│   │   └── ...
-│   ├── workflows/                   # Workflows para orquestração (.hwf)
-│   │   └── main_etl_workflow.hwf
-│   ├── metadata/                    # Conexões, variáveis e ambiente
-│   └── hop-config.json              # Configuração do projeto
+├── workflows/                       # Workflows para orquestração (.hwf)
+│   └── main_etl_workflow.hwf
+├── original_dataset/                # Dados brutos extraídos do .sqlite ou Kaggle
+│   ├── olist_orders_dataset.csv
+│   ├── olist_customers_dataset.csv
+│   └── ...
 ├── transformed/                     # Dados limpos e prontos para carga no DW
-│   └── dim_cliente.csv
-│   └── fato_vendas.csv
-├── dw_clickhouse/                   # Scripts SQL de criação das tabelas no DW
-│   └── create_dim_cliente.sql
+│   ├── dim_cliente.csv
+│   ├── fato_vendas.csv
+│   └── ...
+├── dw_model_pgmodeler/              # Arquivos de modelagem dimensional (pgModeler)
+│   ├── modelo_estrelado.dbm
+│   └── modelo.png
+├── dw_clickhouse/                   # Scripts SQL para criação das tabelas no DW
+│   ├── create_dim_cliente.sql
 │   └── create_fato_vendas.sql
-├── dw_model_pgmodeler/             # Modelo dimensional (.dbm, imagens, etc)
-├── dashboards_superset/            # Dashboards criados no Superset
+├── dashboards_superset/             # Dashboards gerados no Superset
+│   └── vendas_por_estado.json
 └── docs/                            # Relatório, slides e materiais de apresentação
 ````
 

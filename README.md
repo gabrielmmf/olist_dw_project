@@ -1,3 +1,11 @@
+# Importante
+
+- Informações sobre o banco de dados, Arquitetura BUS e outras coisas do projeto: https://colab.research.google.com/drive/1QB2cKihIIgyN84dp2YASw0kymydeMNaN?usp=sharing
+- Para visualizar os esquemas estrela: Copiar o conteúdo e colar no [dbdiagram.io](https://dbdiagram.io/)
+- Se precisar fazer alterações no esquema estrela, editar o arquivo dw_model_star_schema/db-star-schema.dbml (Pede chatgpt ou editar no [dbdiagram.io](https://dbdiagram.io/))
+- Lembrar de commitar as mudanças caso tenha no arquivo db-star-schema.dbml
+- É possível mudar a ferramenta de visualização caso achem algo compatível com dbml. É possível converter dbml para sql também e achar ferramentas.
+
 # 📦 olist_dw_project
 
 Projeto de construção de um **Data Warehouse (DW)** baseado no [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). Toda a engenharia de dados é realizada com **Apache Hop**, com armazenamento analítico em **ClickHouse** e visualização interativa via **Apache Superset**.
@@ -44,7 +52,7 @@ olist_dw_project/
 └── docs/                            # Documentação, slides, relatório final
     ├── relatorio.pdf
     └── apresentacao.pptx
-````
+```
 
 ---
 
@@ -56,10 +64,10 @@ original_dataset/ ➜ Apache Hop ➜ transformed/ ➜ ClickHouse ➜ Superset
 
 ### Etapas:
 
-* **Extração**: CSVs extraídos do SQLite da Olist
-* **Transformação**: pipelines Apache Hop para derivar dimensões, medidas e tabelas limpas
-* **Carga**: dados transformados são importados no ClickHouse
-* **Visualização**: dashboards com Apache Superset, conectados ao DW
+- **Extração**: CSVs extraídos do SQLite da Olist
+- **Transformação**: pipelines Apache Hop para derivar dimensões, medidas e tabelas limpas
+- **Carga**: dados transformados são importados no ClickHouse
+- **Visualização**: dashboards com Apache Superset, conectados ao DW
 
 ---
 
@@ -69,17 +77,17 @@ original_dataset/ ➜ Apache Hop ➜ transformed/ ➜ ClickHouse ➜ Superset
 
 Cada pipeline lida com uma transformação de dados específica:
 
-* `transform_orders.hpl`: limpa e deriva dados de pedidos
-* `transform_customers.hpl`: extrai dados únicos de clientes
-* `transform_products.hpl`: inclui categorias e limpa nomes
-* `transform_reviews.hpl`: trata avaliações e tempos de resposta
-* `transform_payments.hpl`: agrega tipos de pagamento por pedido
-* `generate_fato_vendas.hpl`: cria a tabela fato centralizada
-* Outros pipelines podem ser adicionados conforme necessidade
+- `transform_orders.hpl`: limpa e deriva dados de pedidos
+- `transform_customers.hpl`: extrai dados únicos de clientes
+- `transform_products.hpl`: inclui categorias e limpa nomes
+- `transform_reviews.hpl`: trata avaliações e tempos de resposta
+- `transform_payments.hpl`: agrega tipos de pagamento por pedido
+- `generate_fato_vendas.hpl`: cria a tabela fato centralizada
+- Outros pipelines podem ser adicionados conforme necessidade
 
 ### 🔁 Workflow (`workflows/`)
 
-* `main_etl_workflow.hwf`: orquestra a execução de todos os pipelines na sequência correta, da extração à geração final dos arquivos em `transformed/`
+- `main_etl_workflow.hwf`: orquestra a execução de todos os pipelines na sequência correta, da extração à geração final dos arquivos em `transformed/`
 
 ---
 
@@ -89,29 +97,29 @@ O DW foi modelado em **esquema estrela**, com base nos 4 passos de Kimball:
 
 ### 1. Processo de negócio modelado:
 
-* **Vendas (pedidos com itens)**
+- **Vendas (pedidos com itens)**
 
 ### 2. Granularidade:
 
-* Um registro por **item de pedido vendido**
+- Um registro por **item de pedido vendido**
 
 ### 3. Dimensões utilizadas:
 
-* `dim_cliente` (cliente)
-* `dim_produto` (produto + categoria)
-* `dim_vendedor` (vendedor)
-* `dim_data` (datas de compra e entrega)
-* `dim_pagamento` (formas de pagamento)
-* `dim_avaliacao` (score, tempo de resposta)
+- `dim_cliente` (cliente)
+- `dim_produto` (produto + categoria)
+- `dim_vendedor` (vendedor)
+- `dim_data` (datas de compra e entrega)
+- `dim_pagamento` (formas de pagamento)
+- `dim_avaliacao` (score, tempo de resposta)
 
 ### 4. Fatos numéricos:
 
-* Quantidade por item (`order_item_id`)
-* Preço (`price`)
-* Frete (`freight_value`)
-* Total (`price + freight`)
-* Dias de entrega (`entrega - compra`)
-* Score da avaliação
+- Quantidade por item (`order_item_id`)
+- Preço (`price`)
+- Frete (`freight_value`)
+- Total (`price + freight`)
+- Dias de entrega (`entrega - compra`)
+- Score da avaliação
 
 Diagrama criado em `pgModeler` disponível em `dw_model_pgmodeler/modelo_estrelado.png`
 
@@ -128,8 +136,8 @@ cd olist_dw_project
 
 ### 2. Instalar o Apache Hop
 
-* Site oficial: [https://hop.apache.org/download/](https://hop.apache.org/download/)
-* Extraia e execute o `hop-gui`
+- Site oficial: [https://hop.apache.org/download/](https://hop.apache.org/download/)
+- Extraia e execute o `hop-gui`
 
 ### 3. Abrir o projeto no Hop
 
@@ -138,9 +146,9 @@ cd olist_dw_project
 
 ### 4. Rodar o workflow principal
 
-* Abra `workflows/main_etl_workflow.hwf`
-* Clique em "Run" (ou pressione `F8`)
-* Os arquivos finais serão gerados em `transformed/`
+- Abra `workflows/main_etl_workflow.hwf`
+- Clique em "Run" (ou pressione `F8`)
+- Os arquivos finais serão gerados em `transformed/`
 
 ---
 
@@ -167,13 +175,13 @@ cd olist_dw_project
 
 ## 📊 Visualização (Superset)
 
-* Conecte o Superset ao banco ClickHouse com as tabelas geradas
-* Crie dashboards com métricas como:
+- Conecte o Superset ao banco ClickHouse com as tabelas geradas
+- Crie dashboards com métricas como:
 
-  * Volume de vendas por categoria
-  * Score médio por estado
-  * Tempo médio de entrega por mês
-  * Distribuição de tipos de pagamento
+  - Volume de vendas por categoria
+  - Score médio por estado
+  - Tempo médio de entrega por mês
+  - Distribuição de tipos de pagamento
 
 ---
 
@@ -181,9 +189,9 @@ cd olist_dw_project
 
 ### Pré-requisitos
 
-* Apache Hop
-* pgModeler (para editar o modelo ER)
-* ClickHouse (ou outro DW analítico local)
+- Apache Hop
+- pgModeler (para editar o modelo ER)
+- ClickHouse (ou outro DW analítico local)
 
 ### Regras para contribuição
 
@@ -197,7 +205,7 @@ cd olist_dw_project
 
 ## 📘 Referências
 
-* [Apache Hop Docs](https://hop.apache.org/docs/)
-* [ClickHouse Docs](https://clickhouse.com/docs/)
-* [Superset Docs](https://superset.apache.org/)
-* [Olist Dataset no Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
+- [Apache Hop Docs](https://hop.apache.org/docs/)
+- [ClickHouse Docs](https://clickhouse.com/docs/)
+- [Superset Docs](https://superset.apache.org/)
+- [Olist Dataset no Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)

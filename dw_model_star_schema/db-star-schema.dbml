@@ -1,0 +1,132 @@
+// TABELAS FATO
+
+Table fct_sales {
+  id serial [pk]
+  order_id varchar
+  order_item_id int
+  date_id int
+  customer_id int
+  product_id int
+  seller_id int
+  location_id int
+  payment_id int
+  price float
+  freight float
+  total float
+  delivery_days int
+}
+
+// --------------------------------
+
+Table fct_reviews {
+  id serial [pk]
+  order_id varchar
+  date_id int
+  customer_id int
+  product_id int
+  seller_id int
+  review_id int
+  review_score int
+  response_time int
+  has_comment boolean
+}
+
+// --------------------------------
+
+Table fct_payments {
+  id serial [pk]
+  order_id varchar
+  date_id int
+  customer_id int
+  payment_id int
+  payment_type_id int
+  payment_value float
+  installments int
+}
+
+// TABELAS DIMENSÃO CONFORMADAS
+
+Table dim_date {
+  id int [pk]
+  full_date date
+  year int
+  month int
+  day int
+  day_of_week varchar
+}
+
+Table dim_customer {
+  id int [pk]
+  customer_id varchar
+  unique_id varchar
+  city varchar
+  state varchar
+}
+
+Table dim_product {
+  id int [pk]
+  product_id varchar
+  category varchar
+  category_english varchar
+  weight_g float
+  length_cm float
+  height_cm float
+  width_cm float
+}
+
+Table dim_seller {
+  id int [pk]
+  seller_id varchar
+  city varchar
+  state varchar
+}
+
+Table dim_location {
+  id int [pk]
+  zip_prefix int
+  city varchar
+  state varchar
+  lat float
+  lng float
+}
+
+Table dim_payment {
+  id int [pk]
+  order_id varchar
+  payment_sequential int
+}
+
+Table dim_payment_type {
+  id int [pk]
+  type varchar
+}
+
+Table dim_review {
+  id int [pk]
+  review_id varchar
+  comment_title text
+  comment_message text
+  creation_date date
+  answer_timestamp timestamp
+}
+
+// RELACIONAMENTOS (REFERÊNCIAS)
+
+Ref: fct_sales.date_id > dim_date.id
+Ref: fct_sales.customer_id > dim_customer.id
+Ref: fct_sales.product_id > dim_product.id
+Ref: fct_sales.seller_id > dim_seller.id
+Ref: fct_sales.location_id > dim_location.id
+Ref: fct_sales.payment_id > dim_payment.id
+
+Ref: fct_reviews.date_id > dim_date.id
+Ref: fct_reviews.customer_id > dim_customer.id
+Ref: fct_reviews.product_id > dim_product.id
+Ref: fct_reviews.seller_id > dim_seller.id
+Ref: fct_reviews.review_id > dim_review.id
+
+Ref: fct_payments.date_id > dim_date.id
+Ref: fct_payments.customer_id > dim_customer.id
+Ref: fct_payments.payment_id > dim_payment.id
+Ref: fct_payments.payment_type_id > dim_payment_type.id
+

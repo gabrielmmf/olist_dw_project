@@ -94,12 +94,10 @@ Table dim_payment {
   id int [pk]
   order_id varchar
   payment_sequential int
-}
-
-Table dim_payment_type {
-  id int [pk]
   type varchar
 }
+
+
 
 Table dim_review {
   id int [pk]
@@ -128,5 +126,3 @@ Ref: fct_reviews.review_id > dim_review.id
 Ref: fct_payments.date_id > dim_date.id
 Ref: fct_payments.customer_id > dim_customer.id
 Ref: fct_payments.payment_id > dim_payment.id
-Ref: fct_payments.payment_type_id > dim_payment_type.id
-

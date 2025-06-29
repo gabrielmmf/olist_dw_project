@@ -6,6 +6,8 @@
 - Lembrar de commitar as mudanças caso tenha no arquivo db-star-schema.dbml
 - É possível mudar a ferramenta de visualização caso achem algo compatível com dbml. É possível converter dbml para sql também e achar ferramentas.
 
+**novo ETL, os dados gerados estao em processed_data. os script para gerar devem ser executados em ordem na pasta processing_scripts**
+
 # 📦 olist_dw_project
 
 Projeto de construção de um **Data Warehouse (DW)** baseado no [Brazilian E-Commerce Public Dataset by Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce). Toda a engenharia de dados é realizada com **Apache Hop**, com armazenamento analítico em **ClickHouse** e visualização interativa via **Apache Superset**.

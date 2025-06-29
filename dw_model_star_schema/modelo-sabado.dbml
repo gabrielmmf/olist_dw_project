@@ -1,0 +1,60 @@
+
+Table fct_sales {
+  sale_id varchar [pk]
+  order_id varchar
+  order_item_id varchar
+  product_id varchar [ref: > dim_product.product_id]
+  seller_id varchar [ref: > dim_seller.seller_id]
+  customer_id varchar [ref: > dim_customer.customer_id]
+  date_id varchar [ref: > dim_date.date_id]
+  payment_id varchar [ref: > dim_payment.payment_id]
+  price float
+  freight_value float
+  total float
+}
+
+Table dim_product {
+  product_id varchar [pk]
+  category varchar
+  weight_g float
+  length_cm float
+  height_cm float
+  width_cm float
+}
+
+Table dim_seller {
+  seller_id varchar [pk]
+  city varchar
+  state varchar
+  lat float
+  lng float
+}
+
+Table dim_customer {
+  customer_id varchar [pk]
+  customer_unique_id varchar
+  city varchar
+  state varchar
+  lat float
+  lng float
+}
+
+Table dim_date {
+  date_id varchar [pk]
+  year int
+  month int
+  day int
+  hour int
+  minute int
+  second int
+  day_of_week int
+  quarter int
+}
+
+Table dim_payment {
+  payment_id varchar [pk]
+  n_payment_methods int
+  payment_method varchar
+  n_installments int
+  payment_value float
+}
